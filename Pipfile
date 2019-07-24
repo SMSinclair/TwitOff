@@ -7,6 +7,8 @@ verify_ssl = true
 
 [packages]
 flask = "*"
+basilica = "*"
+flask-sqlalchemy = "*"
 
 [requires]
 python_version = "3.7"

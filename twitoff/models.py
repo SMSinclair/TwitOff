@@ -1,3 +1,4 @@
+"""SQLAlchemy models for TwitOff"""
 from flask_sqlalchemy import SQLAlchemy
 
 DB = SQLAlchemy()
