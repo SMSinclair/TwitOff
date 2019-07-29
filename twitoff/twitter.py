@@ -16,7 +16,8 @@ def add_or_update_user(username):
 	"""Add or update a user *and* their Tweets, error if no/private user."""
 	try:
 		twitter_user = TWITTER.get_user(username)
-		db_user = (User.query.get(twitter_user.id) or User(id=twitter_user.id, name=username))
+		db_user = (User.query.get(twitter_user.id) or 
+				   User(id=twitter_user.id, name=username))
 		DB.session.add(db_user)
 		# we want as many recent non-RT/reply statuses as we can get
 		tweets = twitter_user.timeline(
@@ -26,8 +27,8 @@ def add_or_update_user(username):
 			db_user.newest_tweet_id = tweets[0].id
 		for tweet in tweets:
 			embedding = BASILICA.embed_sentence(tweet.full_text, 
-												model='twitter')
-			db_tweet = Tweet(id=tweet.id, text=tweet.full_text['500'],
+												model='twitter') #mode or model?
+			db_tweet = Tweet(id=tweet.id, text=tweet.full_text[:500],
 							 embedding=embedding)
 			db_user.tweets.append(db_tweet)
 			DB.session.add(db_tweet)

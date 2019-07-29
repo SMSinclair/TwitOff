@@ -10,8 +10,8 @@
     <p>Content for TwitOff will go here...</p>
   
     {% block content %}
-    <form>
-      <input type='text' name='user_name' placeholder="User to add">
+    <form action="/user" method="post">
+      <input type="text" name="username" placeholder="User to add">
       <input type="submit" value="Add User">
     </form>
     {% endblock %}

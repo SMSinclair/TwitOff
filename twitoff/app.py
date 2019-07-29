@@ -19,17 +19,15 @@ def create_app():
     @app.route('/user/<name>', methods=['GET'])
     def user(name=None):
         message = ''
-        name = name or request.values['user_name']
+        name = name or request.values['username']
         try:
             if request.method == 'POST':
                 add_or_update_user(name)
                 message = 'User {} successfully added!'.format(name)
-            tweets = User.query.filter(User.name == name).one().tweets
-            pass
+            tweets = User.query.filter(User.name == name).first().tweets # removed .one() before tweets
         except Exception as e:
             message = 'Error adding {}: {}'.format(name, e)
             tweets = []
-            pass
         return render_template('user.html', title=name, tweets=tweets, 
                                message=message)
     

@@ -1,10 +1,10 @@
 from .models import User
-from twitter import BASILICA
+from .twitter import BASILICA
 import pickle
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 
-def predict_user(user1_name, user2_name, tweet_text):
+def predict_user(user1_name, user2_name, tweet_text, cache=None):
     """Determine which user is more likely to have authored a tweet"""
 
     user_set = pickle.dumps((user1_name, user2_name)) #  users sorted
